@@ -1,0 +1,61 @@
+{
+  "name": "@michaelcardose/do-token-bucket",
+  "version": "0.1.0",
+  "description": "Token-bucket rate limiter as a Cloudflare Durable Object. Lazy refill, no timers, SQLite-backed (free tier), tested inside workerd.",
+  "license": "MIT",
+  "author": "Michael Tupas Cardose",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Michaelcarduce/do-token-bucket"
+  },
+  "homepage": "https://michael-cardose.vercel.app/work/kosher-kav",
+  "keywords": [
+    "cloudflare",
+    "workers",
+    "durable-objects",
+    "rate-limit",
+    "token-bucket",
+    "typescript"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "types": "wrangler types",
+    "typecheck": "wrangler types && tsc --noEmit",
+    "dev": "wrangler dev",
+    "deploy:dry-run": "wrangler deploy --dry-run --outdir=.wrangler/dry-run",
+    "prepublishOnly": "npm run typecheck && npm test && npm run build"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-pool-workers": "^0.22.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.6.0",
+    "vitest": "^4.1.0",
+    "wrangler": "^4.0.0"
+  },
+  "allowScripts": {
+    "esbuild@0.28.1": true,
+    "esbuild@0.27.7": true,
+    "workerd@1.20260815.1": true,
+    "workerd@1.20260911.1": true
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "do-token-bucket",
+  "main": "src/worker.ts",
+  "compatibility_date": "2026-08-01",
+  "durable_objects": {
+    "bindings": [{ "name": "RATE_LIMITER", "class_name": "TokenBucket" }]
+  },
+  "migrations": [
+    // SQLite-backed so the object runs on the Workers free plan.
+    { "tag": "v1", "new_sqlite_classes": ["TokenBucket"] }
+  ]
+}
